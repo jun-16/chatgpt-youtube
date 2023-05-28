@@ -1,0 +1,8 @@
+streamlit
+streamlit-chat
+langchain
+openai
+python-dotenv
+tiktoken
+youtube-transcript-api
+google-api-python-client
