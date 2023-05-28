@@ -26,7 +26,7 @@ from langchain.llms import OpenAI
 ### Sreamlit Cloudにデプロイする場合の環境変数読み込み
 os.environ['OPENAI_API_KEY'] = st.secrets.OpenAIAPI.openai_api_key
 os.environ['GOOGLE_CSE_ID'] = st.secrets.GoogleCSE.google_cse_id
-os.environ['GoogleAPI'] = st.secrets.GoogleAPI.google_api_key
+os.environ['GOOGLE_API_KEY'] = st.secrets.GoogleAPI.google_api_key
 
 def load_youtube(youtube_url):
     loader = YoutubeLoader.from_youtube_url(youtube_url, language="ja")
