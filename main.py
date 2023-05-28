@@ -19,9 +19,14 @@ from langchain.agents import initialize_agent
 from langchain.agents import AgentType
 from langchain.llms import OpenAI
 
-from dotenv import load_dotenv
-# 環境変数の読み込み
-load_dotenv()
+### ローカル実行の場合の環境変数読み込み
+# from dotenv import load_dotenv
+# load_dotenv()
+
+### Sreamlit Cloudにデプロイする場合の環境変数読み込み
+os.environ['OPENAI_API_KEY'] = st.secrets.OpenAIAPI.openai_api_key
+os.environ['GOOGLE_CSE_ID'] = st.secrets.GoogleCSE.google_cse_id
+os.environ['GoogleAPI'] = st.secrets.google_api_key.google_api_key
 
 def load_youtube(youtube_url):
     loader = YoutubeLoader.from_youtube_url(youtube_url, language="ja")
