@@ -19,14 +19,21 @@ from langchain.agents import initialize_agent
 from langchain.agents import AgentType
 from langchain.llms import OpenAI
 
-### ローカル実行の場合の環境変数読み込み
+### 環境変数設定
+## ローカル実行の場合
 # from dotenv import load_dotenv
 # load_dotenv()
-
-### Sreamlit Cloudにデプロイする場合の環境変数読み込み
+## Sreamlit Cloudにデプロイする場合
 os.environ['OPENAI_API_KEY'] = st.secrets.OpenAIAPI.openai_api_key
 os.environ['GOOGLE_CSE_ID'] = st.secrets.GoogleCSE.google_cse_id
 os.environ['GOOGLE_API_KEY'] = st.secrets.GoogleAPI.google_api_key
+
+### モデル設定
+## ローカル実行の場合
+# model_name="gpt-3.5-turbo"
+# model_name="text-davinci-003"
+## Sreamlit Cloudにデプロイする場合
+model_name=st.secrets.OpenAIModel.model_name
 
 def load_youtube(youtube_url):
     loader = YoutubeLoader.from_youtube_url(youtube_url, language="ja")
@@ -78,7 +85,7 @@ def run_qa(docs, question):
 
 def run_net_search(question, memory):
     # ChatGPT-3.5のモデルのインスタンスの作成
-    llm = OpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    llm = OpenAI(model_name=model_name, temperature=0)
 
     tools = load_tools(["google-search"], llm=llm)
 
@@ -140,7 +147,7 @@ except:
     memory = ConversationBufferMemory(return_messages=True)
 
 # ChatGPT-3.5のモデルのインスタンスの作成
-chat = ChatOpenAI(model_name="gpt-3.5-turbo")
+chat = ChatOpenAI(model_name=model_name)
 
 # YouTubeのURLが入力されている場合、字幕情報を読み込む
 docs = ''
